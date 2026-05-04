@@ -5,7 +5,7 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class userRepository {
+public class UserRepository {
 
     private List<User> usuarios = new ArrayList<>();
 
