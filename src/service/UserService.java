@@ -3,24 +3,32 @@ package service;
 import model.User;
 import repository.UserRepository;
 
+import java.util.List;
+
 public class UserService {
     private UserRepository repository = new UserRepository();
+    private Long contadorId = 1L;
 
-    public void criar(Long id, String nome, String email){
-        repository.salvar(new User(id,nome,email));
+
+    public void criar(String nome, String email){
+        repository.salvar(new User(contadorId++, nome,email));
     }
 
-    public boolean atualizar(Long id,String nome, String email){
-        User user = repository.buscarId(id);
-        if (user != null){
-            user.setNome(nome);
-            user.setEmail(email);
+    public List<User> listar() {
+        return repository.listaUsers();
+    }
+
+    public boolean atualizar(Long id, String nome, String email) {
+        User usuario = repository.buscarId(id);
+        if (usuario != null) {
+            usuario.setNome(nome);
+            usuario.setEmail(email);
             return true;
         }
         return false;
     }
 
-    public boolean deletat(Long id){
+    public boolean deletar(Long id){
         User user = repository.buscarId(id);
         if (user != null) {
             repository.deletar(id);
